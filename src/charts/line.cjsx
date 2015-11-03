@@ -19,11 +19,13 @@ class Line extends React.Component
     draw: ->
         # `@` is set via .call()
         # from Core chart component
-        Chart.Line @canvas,
+        @chart = new Chart(@canvas, {
+            type: 'line'
             data:
                 labels: @props.labels
                 datasets: @state.dataSets
             options: @buildOptions()
+        })
 
     render: =>
         <Core {...@props} draw={@draw} />

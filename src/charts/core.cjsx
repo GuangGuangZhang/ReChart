@@ -70,7 +70,9 @@ class Core extends React.Component
         @props.draw.call(@)
 
     render: =>
-        <div style={position: 'relative', width: @props.width, height: @props.height}>
+        style = @props.style
+        style.position = 'relative'
+        <div style={style}>
             {@state.legend}
             <canvas ref={@setContext} id='cjs-line-chart' />
         </div>
