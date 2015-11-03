@@ -1,3 +1,4 @@
+_extend = require 'lodash/object/extend'
 Chart = require '../chart'
 React = require 'react'
 
@@ -5,20 +6,27 @@ Core = require './core'
 {array, string, bool, func, number, object} = React.PropTypes
 
 
-class Line extends Core
-    @propTypes:
+class Line extends React.Component
+    @propTypes: _extend({}, Core.propTypes, {
         scales: object
         stacked: bool
+    })
 
-    @defaultProps:
+    @defaultProps: _extend({}, Core.defautlProps, {
         stacked: false
+    })
 
-    draw: =>
+    draw: ->
+        # `@` is set via .call()
+        # from Core chart component
         Chart.Line @canvas,
             data:
                 labels: @props.labels
                 datasets: @state.dataSets
             options: @buildOptions()
+
+    render: =>
+        <Core {...@props} draw={@draw} />
 
 
 module.exports = Line

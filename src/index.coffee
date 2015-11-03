@@ -6,4 +6,5 @@ exports.ToolTips = require './tool_tips'
 # Char types
 exports.Bar = require './charts/bar'
 exports.Line = require './charts/line'
+exports.Radar = require './charts/radar'
 

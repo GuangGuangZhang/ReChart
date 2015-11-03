@@ -21,7 +21,6 @@ class Core extends React.Component
         labels: array.isRequired
         onClick: func
         defaultColor: string
-        stacked: bool
 
     @defaultProps:
         events: ["mousemove", "mouseout", "click", "touchstart", "touchmove", "touchend"]
@@ -33,7 +32,6 @@ class Core extends React.Component
         responsive: true
         responsiveAnimationDuration: 0
         defaultColor: 'rgba(0,0,0,0.1)'
-        stacked: false
 
     buildOptions: =>
         options = {k: v for k, v of @props}
@@ -69,7 +67,7 @@ class Core extends React.Component
 
     setContext: (canvas) =>
         @canvas = canvas
-        @draw()
+        @props.draw.call(@)
 
     render: =>
         <div style={position: 'relative', width: @props.width, height: @props.height}>
