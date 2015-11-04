@@ -11,8 +11,8 @@ var source = require('vinyl-source-stream');
 var transform = require('vinyl-transform');
 var watchify = require('watchify');
 
-var src = '';
-var dest = '';
+var src = 'examples/';
+var dest = 'examples/';
 
 var buildScriptDev = function (watch) {
     var rebundle = function () {

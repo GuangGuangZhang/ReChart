@@ -8,7 +8,7 @@ Polar,
 Pie,
 Doughnut,
 DataSet,
-ToolTips} = require './src/index'
+ToolTips} = require '../src/index'
 
 
 mock_data = [65, 59, 80, 81, 56, 55, 40]
