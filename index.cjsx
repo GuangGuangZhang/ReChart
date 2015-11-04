@@ -1,6 +1,14 @@
 React = require 'react'
 ReactDOM = require 'react-dom'
-{Bar, Line, Radar, Legend, Polar, DataSet, ToolTips} = require './src/index'
+{Bar,
+Line,
+Radar,
+Legend,
+Polar,
+Pie,
+Doughnut,
+DataSet,
+ToolTips} = require './src/index'
 
 
 mock_data = [65, 59, 80, 81, 56, 55, 40]
@@ -14,7 +22,7 @@ legend = <Legend style={position: 'absolute', top: 25, left: 45, padding: '10px 
                     First
                 </li>
                 <li>
-                    <span style={backgroundColor: 'yellow', display: 'block', position: 'relative', float: 'left', top: 3, left: -2, width:10, height:10} />
+                    <span style={backgroundColor: 'lightblue', display: 'block', position: 'relative', float: 'left', top: 3, left: -2, width:10, height:10} />
                     Second
                 </li>
             </ul>
@@ -31,7 +39,6 @@ LineExample = React.createClass
 
             {legend}
 
-            <ToolTips enabled=true />
             <DataSet
                 label="First"
                 fill=false
@@ -40,13 +47,12 @@ LineExample = React.createClass
             <DataSet
                 label="Second"
                 fill=false
-                borderColor="yellow"
+                borderColor="lightblue"
                 data=mock_data2 />
         </Line>
 
 
 ReactDOM.render <LineExample />, document.getElementById('line-graph')
-
 
 
 BarExample = React.createClass
@@ -68,8 +74,8 @@ BarExample = React.createClass
             <DataSet
                 label="Second"
                 fill=false
-                backgroundColor="yellow"
-                borderColor="yellow"
+                backgroundColor="lightblue"
+                borderColor="lightblue"
                 data=mock_data2 />
         </Bar>
 
@@ -84,6 +90,7 @@ RadarExample = React.createClass
             style={width: 600, height: 400}>
 
             {legend}
+            <ToolTips enabled=true />
 
             <DataSet
                 label="First"
@@ -94,8 +101,8 @@ RadarExample = React.createClass
             <DataSet
                 label="Second"
                 fill=false
-                backgroundColor="yellow"
-                borderColor="yellow"
+                backgroundColor="lightblue"
+                borderColor="lightblue"
                 data=mock_data2 />
         </Radar>
 
@@ -113,18 +120,74 @@ PolarExample = React.createClass
             {legend}
 
             <DataSet
-                label="First"
-                fill=false
-                backgroundColor="green"
-                borderColor="green"
-                data=mock_data />
-            <DataSet
                 label="Second"
                 fill=false
-                backgroundColor="yellow"
-                borderColor="yellow"
+                backgroundColor={[
+                    "#F7464A",
+                    "#46BFBD",
+                    "#FDB45C",
+                    "#949FB1",
+                    "#4D5360",
+                    "#720c0c",
+                    "#117a5e"
+                ]}
                 data=mock_data2 />
         </Polar>
 
 ReactDOM.render <PolarExample />, document.getElementById('polar-graph')
 
+
+PieExample = React.createClass
+    displayName: 'PieExample'
+
+    render: ->
+        <Doughnut
+            labels={labels}
+            style={width: 600, height: 400}
+            percentageInnerCutout=0>
+
+            {legend}
+
+            <DataSet
+                label="First"
+                fill=false
+                backgroundColor={[
+                    "#F7464A",
+                    "#46BFBD",
+                    "#FDB45C",
+                    "#949FB1",
+                    "#4D5360",
+                    "#720c0c",
+                    "#117a5e"
+                ]}
+                data=mock_data />
+        </Doughnut>
+
+ReactDOM.render <PieExample />, document.getElementById('pie-graph')
+
+
+DoughnutExample = React.createClass
+    displayName: 'DoughnutExample'
+
+    render: ->
+        <Doughnut
+            labels={labels}
+            style={width: 600, height: 400}>
+
+            {legend}
+
+            <DataSet
+                labels={labels}
+                backgroundColor={[
+                    "#F7464A",
+                    "#46BFBD",
+                    "#FDB45C",
+                    "#949FB1",
+                    "#4D5360",
+                    "#720c0c",
+                    "#117a5e"
+                ]}
+                data=mock_data />
+        </Doughnut>
+
+ReactDOM.render <DoughnutExample />, document.getElementById('doughnut-graph')

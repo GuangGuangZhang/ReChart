@@ -14,6 +14,7 @@ class ToolTips extends React.Component
         fontFamily: string
         fontSize: number
         fontStyle: string
+        mode: string
         multiKeyBackground: string
         titleFontColor: string
         titleFontFamily: string
@@ -34,7 +35,8 @@ class ToolTips extends React.Component
         fontFamily: "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif"
         fontSize: 10
         fontStyle: 'normal'
-        multiKeyBackground: '#fff'
+        mode: 'label'
+        multiKeyBackground: '#000'
         titleFontColor: '#fff'
         titleFontFamily: "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif"
         titleFontSize: 12

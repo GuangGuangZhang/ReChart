@@ -1,11 +1,11 @@
 React = require 'react'
 invariant = require 'invariant'
-{array, string, bool, func, number, object} = React.PropTypes
+{array, string, bool, func, number, oneOfType} = React.PropTypes
 
 
 class DataSet extends React.Component
     @propTypes:
-        backgroundColor: string
+        backgroundColor: oneOfType [string, array]
         borderColor: string
         borderCapStyle: string
         borderDash: array

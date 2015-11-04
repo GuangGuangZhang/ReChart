@@ -25,16 +25,15 @@ class Core extends React.Component
     @defaultProps:
         events: ["mousemove", "mouseout", "click", "touchstart", "touchmove", "touchend"]
         hover:
-            onHover: null
-            mode: 'single'
-            animationDuration: 0
+            mode: 'label'
         maintainAspectRatio: true
         responsive: true
         responsiveAnimationDuration: 0
         defaultColor: 'rgba(0,0,0,0.1)'
 
     buildOptions: =>
-        options = {k: v for k, v of @props}
+        options = {}
+        options[k] = v for k, v of @props
         options.tooltips = @state.toolTips or enabled: false
         return options
 
@@ -43,27 +42,26 @@ class Core extends React.Component
         options[k] = v for k, v of el.props
         return options
 
+    _getChildrenByName: (children, name, onlyFirst=false) ->
+        children = React.Children.toArray children
+        childOptions = []
+        for child in children
+            displayName = child.type.displayName or child.type.name
+            if displayName is name
+                return child if onlyFirst
+                childOptions.push(child)
+        return childOptions if childOptions.length
+        return null
+
     getDataSets: (children) =>
-        dataSets = []
-        React.Children.forEach children, (element) =>
-            if element.type.displayName is 'DataSet' or element.type.name is 'DataSet'
-                dataSets.push(@_getOptionsFromElement(element))
-        return dataSets
+        return (@_getOptionsFromElement(c) for c in @_getChildrenByName(children, 'DataSet'))
 
     getToolTips: (children) =>
-        children = React.Children.toArray children
-        return @_getOptionsFromElement(c) for c in children when c.type.displayName is 'ToolTips' or c.type.name is 'ToolTips'
-        return null
+        toolTips = @_getChildrenByName(children, 'ToolTips', true)
+        return if toolTips then @_getOptionsFromElement(toolTips) else null
 
     getLegend: (children) ->
-        children = React.Children.toArray children
-        return c for c in children when c.type.displayName is 'Legend' or c.type.name is 'Legend'
-        return null
-
-    getToolTips: (children) ->
-        children = React.Children.toArray children
-        return c for c in children when c.type.displayName is 'ToolTips' or c.type.name is 'ToolTips'
-        return enabled: false
+        return @_getChildrenByName(children, 'Legend', true)
 
     setContext: (canvas) =>
         @canvas = canvas
@@ -71,7 +69,7 @@ class Core extends React.Component
 
     render: =>
         style = @props.style
-        style.position = 'relative'
+        style.position = 'relative' unless style.position
         <div style={style}>
             {@state.legend}
             <canvas ref={@setContext} id='cjs-line-chart' />
