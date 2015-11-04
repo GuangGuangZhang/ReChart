@@ -141,7 +141,7 @@ PieExample = React.createClass
     displayName: 'PieExample'
 
     render: ->
-        <Doughnut
+        <Pie
             labels={labels}
             style={width: 600, height: 400}
             percentageInnerCutout=0>
@@ -161,7 +161,7 @@ PieExample = React.createClass
                     "#117a5e"
                 ]}
                 data=mock_data />
-        </Doughnut>
+        </Pie>
 
 ReactDOM.render <PieExample />, document.getElementById('pie-graph')
 

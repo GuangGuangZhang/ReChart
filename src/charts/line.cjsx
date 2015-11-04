@@ -24,6 +24,14 @@ class Line extends React.Component
                 labels: @props.labels
                 datasets: @state.dataSets
             options: @buildOptions()
+        @chart = new Chart(@canvas, {
+            type: 'line'
+            data:
+                labels: @props.labels
+                datasets: @state.dataSets
+            options:
+                @buildOptions()
+        })
 
     render: =>
         <Core {...@props} draw={@draw} />

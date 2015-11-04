@@ -6,7 +6,7 @@ Core = require './core'
 {array, string, bool, func, number, object} = React.PropTypes
 
 
-class Doughnut extends React.Component
+class Pie extends React.Component
     @propTypes: _extend({}, Core.propTypes, {
         segmentShowStroke: bool
         segmentStrokeColor: string
@@ -31,7 +31,7 @@ class Doughnut extends React.Component
 
     draw: ->
         @chart = new Chart(@canvas, {
-            type: 'doughnut'
+            type: 'pie'
             data:
                 labels: @props.labels
                 datasets: @state.dataSets
@@ -42,4 +42,5 @@ class Doughnut extends React.Component
         <Core {...@props} draw={@draw} />
 
 
-module.exports = Doughnut
+module.exports = Pie
+
